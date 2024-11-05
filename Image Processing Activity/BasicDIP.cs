@@ -114,8 +114,8 @@ namespace Image_Processing_Activity
                 {
                     pixel = a.GetPixel(x, y);
                     newRed = (int)(pixel.R * 0.393 + pixel.G * 0.769 + pixel.B * 0.189);
-                    newBlue = (int)(pixel.R * 0.349 + pixel.G * 0.686 + pixel.B * 0.168);
-                    newGreen = (int)(pixel.R * 0.272 + pixel.G * 0.534 + pixel.B * 0.131);
+                    newGreen = (int)(pixel.R * 0.349 + pixel.G * 0.686 + pixel.B * 0.168);
+                    newBlue = (int)(pixel.R * 0.272 + pixel.G * 0.534 + pixel.B * 0.131);
 
                     red = newRed > 255 ? 255 : newRed;
                     green = newGreen > 255 ? 255 : newGreen;
