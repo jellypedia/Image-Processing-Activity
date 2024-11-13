@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageProcess2;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WebCamLib;
 
 namespace Image_Processing_Activity
 {
@@ -14,6 +16,7 @@ namespace Image_Processing_Activity
     {
         Bitmap origImg, processedImg;
         Form2 formsubtract;
+        Device[] devices;
         public Form1()
         {
             InitializeComponent();
@@ -68,6 +71,50 @@ namespace Image_Processing_Activity
             formsubtract.Owner = this;
             formsubtract.Show();
             this.Hide();
+        }
+
+        private void onToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            devices[0].ShowWindow(pictureBox1);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            devices = DeviceManager.GetAllDevices();
+        }
+
+        private void smoothinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processedImg = new Bitmap(origImg);
+            BitmapFilter.Smooth(processedImg);
+            pictureBox2.Image = processedImg;
+
+        }
+
+        private void gaussianBlurToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processedImg = new Bitmap(origImg);
+            BitmapFilter.GaussianBlur(processedImg);
+            pictureBox2.Image = processedImg;
+        }
+
+        private void sharpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processedImg = new Bitmap(origImg);
+            BitmapFilter.Sharpen(processedImg);
+            pictureBox2.Image = processedImg;
+        }
+
+        private void meanRemovalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            processedImg = new Bitmap(origImg);
+            BitmapFilter.MeanRemoval(processedImg);
+            pictureBox2.Image = processedImg;
+        }
+
+        private void embossingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void histogramToolStripMenuItem_Click(object sender, EventArgs e)
