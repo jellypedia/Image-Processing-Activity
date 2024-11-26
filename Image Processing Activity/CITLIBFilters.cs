@@ -71,6 +71,37 @@ namespace ImageProcess2
             return true;
         }
 
+        public static void Threshold(ref Bitmap image, int threshold)
+        {
+            BitmapFilter.GrayScale(image);
+
+            if (threshold < 0 || threshold > 255)
+            {
+                return;
+            }
+
+            BitmapData bd = image.LockBits(
+                new Rectangle(0, 0, image.Width, image.Height),
+                ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            unsafe
+            {
+                int padding = bd.Stride - image.Width * 3;
+
+                byte* p = (byte*)bd.Scan0;
+
+                for (int i = 0; i < image.Height; i++, p += padding, p += padding)
+                {
+                    for (int j = 0; j < image.Width; j++, p += 3)
+                    {
+                        p[0] = p[1] = p[2] = (byte)(p[0] < threshold ? 0 : 255);
+                    }
+                }
+            }
+
+            image.UnlockBits(bd);
+        }
+
         public static bool GrayScale(Bitmap b)
         {
             // GDI+ still lies to us - the return format is BGR, NOT RGB.
@@ -449,7 +480,6 @@ namespace ImageProcess2
         public static bool EdgeDetectConvolution(Bitmap b, short nType, byte nThreshold)
         {
             ConvMatrix m = new ConvMatrix();
-
             // I need to make a copy of this bitmap BEFORE I alter it 80)
             Bitmap bTemp = (Bitmap)b.Clone();
 

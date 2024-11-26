@@ -16,11 +16,13 @@ namespace Image_Processing_Activity
     {
         Bitmap origImg, processedImg;
         Form2 formsubtract;
+        Form3 formcoins;
         Device[] devices;
         public Form1()
         {
             InitializeComponent();
             formsubtract = new Form2();
+            formcoins = new Form3();
         }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -88,7 +90,6 @@ namespace Image_Processing_Activity
             processedImg = new Bitmap(origImg);
             BitmapFilter.Smooth(processedImg);
             pictureBox2.Image = processedImg;
-
         }
 
         private void gaussianBlurToolStripMenuItem_Click(object sender, EventArgs e)
@@ -115,6 +116,18 @@ namespace Image_Processing_Activity
         private void embossingToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void coinsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void countToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formcoins.Owner = this;
+            formcoins.Show();
+            this.Hide();
         }
 
         private void histogramToolStripMenuItem_Click(object sender, EventArgs e)
