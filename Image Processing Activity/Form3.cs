@@ -31,9 +31,8 @@ namespace Image_Processing_Activity
             coinsTotal = (Bitmap)coinsImg.Clone();
 
             BitmapFilter.Threshold(ref coinsTotal, 200);
-            pictureBox1.Image = coinsTotal;
 
-
+            Count(coinsTotal);
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
@@ -44,7 +43,7 @@ namespace Image_Processing_Activity
 
         List<List<Point>> coins;
         bool[,] visited;
-        int five_p, one_p, five_c, ten_c, tf_c;
+        int fivePeso, onePeso, fiveCent, tenCent, twentyFiveCent\;
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -58,7 +57,7 @@ namespace Image_Processing_Activity
 
             int count = 0;
             int total = 0;
-            five_p = one_p = five_c = ten_c = tf_c = 0;
+            fivePeso = onePeso = fiveCent = tenCent = twentyFiveCent = 0;
 
             for (int i = 0; i < coinsTotal.Width; i++)
             {
@@ -85,13 +84,7 @@ namespace Image_Processing_Activity
                     }
                 }
 
-                //label1.Text = count.ToString();
-                label1.Text = (total / 100) + "." + (total % 100);
-                //label11.Text = five_p.ToString();
-                //label12.Text = one_p.ToString();
-                //label13.Text = tf_c.ToString();
-                //label14.Text = ten_c.ToString();
-                //label15.Text = five_c.ToString();
+                label2.Text = (total / 100) + "." + (total % 100);
             }
         }
 
@@ -150,29 +143,29 @@ namespace Image_Processing_Activity
         {
             if (size > 8000)
             {
-                five_p++;
+                fivePeso++;
                 return 500;
             }
 
             if (size > 6000)
             {
-                one_p++;
+                onePeso++;
                 return 100;
             }
 
             if (size > 4000)
             {
-                tf_c++;
+                twentyFiveCent++;
                 return 25;
             }
 
             if (size > 3500)
             {
-                ten_c++;
+                tenCent++;
                 return 10;
             }
 
-            five_c++;
+            fiveCent++;
             return 5;
         }
     }
